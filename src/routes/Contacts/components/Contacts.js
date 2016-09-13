@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { List } from 'material-ui/List'
+import ContactItem from './ContactItem'
 import * as Firebase from '../../../services/firebase'
 
 class Contacts extends Component {
@@ -14,15 +16,9 @@ class Contacts extends Component {
   render () {
     const { contacts } = this.props
     return (
-      <div style={{ margin: '0 auto' }} >
-        <h2>Contacts: {contacts.length}</h2>
-
-        {contacts.map(c => { return (<div key={c.key}>{c.firstName} {c.lastName}</div>) }) }
-
-        <button className='btn btn-default'>
-          Copy Address
-        </button>
-      </div>
+      <List>
+        {contacts.map(c => { return <ContactItem key={c.key} item={c} /> })}
+      </List>
     )
   }
 }
@@ -33,5 +29,3 @@ Contacts.propTypes = {
 }
 
 export default Contacts
-
-// {props.contacts.map(c => { return <ContactItem key={c.key} item={c} /> }) }

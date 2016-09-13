@@ -25,7 +25,7 @@ const addKeys = (data) => {
 }
 
 export function removeContact (key) {
-  updateItem(key, { archived: 'y' })
+  updateItem(key, { archive: 'y' })
 }
 
 export function updateItem (key, changes) {
