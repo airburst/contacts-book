@@ -1,17 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { List } from 'material-ui/List'
 import ContactItem from './ContactItem'
 import Paper from 'material-ui/Paper'
 import Divider from 'material-ui/Divider'
 import TextField from 'material-ui/TextField'
+import Snackbar from 'material-ui/Snackbar'
 import * as Firebase from '../../../services/firebase'
 import './Contacts.scss'
 
-class Contacts extends Component {
+export default class Contacts extends Component {
 
   static propTypes = {
-    contacts     : React.PropTypes.array,
-    setContacts  : React.PropTypes.func.isRequired
+    contacts       : PropTypes.array.isRequired,
+    settings       : PropTypes.object.isRequired,
+    setContacts    : PropTypes.func.isRequired
+    // setFilter      : PropTypes.func.isRequired,
+    // showReOpenUndo : PropTypes.func.isRequired,
+    // hideReOpenUndo : PropTypes.func.isRequired
   }
 
   constructor (props) {
@@ -35,6 +40,15 @@ class Contacts extends Component {
     this.setState({ filterValue: event.target.value })
   }
 
+  // handleRequestClose = () => {
+  //   this.props.hideReOpenUndo()
+  // };
+
+  // reOpenContact = () => {
+  //   Firebase.openContact(this.props.settings.lastKey)
+  //   this.props.hideReOpenUndo()
+  // }
+
   filterContacts = (list, filter) => {
     if (filter === '') { return list }
     return list.filter(l => (l.fname + l.lname).toLowerCase().indexOf(filter.toLowerCase()) > -1)
@@ -54,12 +68,19 @@ class Contacts extends Component {
               />
             </div>
             <Divider />
-            {visibleContacts.map(c => { return <ContactItem key={c.key} item={c} /> })}
+            {visibleContacts.map(c => { return <ContactItem key={c.key} item={c}  /> })}
           </List>
         </Paper>
+
+        <Snackbar
+          open={this.props.showReopenUndo}
+          message='Removed contact'
+          autoHideDuration={4000}
+          action='undo'
+          onActionTouchTap={this.reOpenContact}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     )
   }
 }
-
-export default Contacts

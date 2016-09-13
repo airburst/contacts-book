@@ -7,8 +7,7 @@ export default (store) => ({
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
     require.ensure([], (require) => {
-      /*  Webpack - use require callback to define
-          dependencies for bundling   */
+      /*  Webpack - use require callback to define dependencies for bundling   */
       const Contacts = require('./containers/ContactsContainer').default
       const reducer = require('./modules/contacts').default
 
