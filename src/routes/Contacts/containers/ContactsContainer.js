@@ -8,15 +8,15 @@ import {
 import Contacts from '../components/Contacts'
 
 const mapDispatchToProps = {
-  setContacts : setContacts,
-  setFilter: setFilter,
-  showReOpenUndo: showReOpenUndo,
-  hideReOpenUndo: hideReOpenUndo
+  setContacts,
+  setFilter,
+  showReOpenUndo,
+  hideReOpenUndo
 }
 
 const mapStateToProps = (state) => ({
-  contacts : state.contacts,
-  settings : state.settings
+  contacts: state.contacts,
+  settings: state.settings
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contacts)

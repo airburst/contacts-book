@@ -39,8 +39,12 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [SET_FILTER]: (state, action) => action.payload,
-  [SHOW_REOPEN_UNDO]: (state, action) => Object.assign({}, state, { showReopenUndo: true, lastKey: action.payload }),
-  [HIDE_REOPEN_UNDO]: (state, action) => Object.assign({}, state, { showReopenUndo: false, lastKey: undefined })
+  [SHOW_REOPEN_UNDO]: (state, action) => {
+    return Object.assign({}, state, { isUndoShown: true, lastKey: action.payload })
+  },
+  [HIDE_REOPEN_UNDO]: (state, action) => {
+    return Object.assign({}, state, { isUndoShown: false, lastKey: undefined })
+  }
 }
 
 // ------------------------------------
@@ -48,7 +52,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   filterValue: '',
-  showReopenUndo: false,
+  isUndoShown: false,
   lastKey: undefined
 }
 export default function settingsReducer (state = initialState, action) {

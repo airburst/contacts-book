@@ -38,6 +38,6 @@ export default (initialState = {}) => {
       store.replaceReducer(reducers(store.asyncReducers))
     })
   }
-console.log('Store', store);
+
   return store
 }

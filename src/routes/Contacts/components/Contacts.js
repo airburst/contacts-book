@@ -13,10 +13,10 @@ export default class Contacts extends Component {
   static propTypes = {
     contacts       : PropTypes.array.isRequired,
     settings       : PropTypes.object.isRequired,
-    setContacts    : PropTypes.func.isRequired
-    // setFilter      : PropTypes.func.isRequired,
-    // showReOpenUndo : PropTypes.func.isRequired,
-    // hideReOpenUndo : PropTypes.func.isRequired
+    setContacts    : PropTypes.func.isRequired,
+    setFilter      : PropTypes.func.isRequired,
+    showReOpenUndo : PropTypes.func.isRequired,
+    hideReOpenUndo : PropTypes.func.isRequired
   }
 
   constructor (props) {
@@ -40,14 +40,14 @@ export default class Contacts extends Component {
     this.setState({ filterValue: event.target.value })
   }
 
-  // handleRequestClose = () => {
-  //   this.props.hideReOpenUndo()
-  // };
+  handleRequestClose = () => {
+    this.props.hideReOpenUndo()
+  };
 
-  // reOpenContact = () => {
-  //   Firebase.openContact(this.props.settings.lastKey)
-  //   this.props.hideReOpenUndo()
-  // }
+  reOpenContact = () => {
+    Firebase.openContact(this.props.settings.lastKey)
+    this.props.hideReOpenUndo()
+  }
 
   filterContacts = (list, filter) => {
     if (filter === '') { return list }
@@ -73,7 +73,7 @@ export default class Contacts extends Component {
         </Paper>
 
         <Snackbar
-          open={this.props.showReopenUndo}
+          open={this.props.settings.isUndoShown}
           message='Removed contact'
           autoHideDuration={4000}
           action='undo'

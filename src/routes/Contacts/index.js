@@ -9,10 +9,12 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define dependencies for bundling   */
       const Contacts = require('./containers/ContactsContainer').default
-      const reducer = require('./modules/contacts').default
+      const contactsReducer = require('./modules/contacts').default
+      const settingsReducer = require('./modules/settings').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'contacts', reducer })
+      injectReducer(store, { key: 'contacts', reducer: contactsReducer })
+      injectReducer(store, { key: 'settings', reducer: settingsReducer })
 
       /*  Return getComponent   */
       cb(null, Contacts)
