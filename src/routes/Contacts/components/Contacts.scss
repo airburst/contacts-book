@@ -1,7 +1,22 @@
+$break-small: 480px;
+$break-mobile: 772px;
+$break-tablet: 992px;
+$break-large: 1200px;
+
+.container {
+    width: 100%;
+    margin: 0;
+    @media screen and (min-width: $break-tablet) {
+        max-width: 960px;
+        margin: 40px auto;
+    }
+}
+
 .list {
     padding: 0 !important;
 }
 
 .search {
     padding: 0 16px;
+    background-color: #e0e0e0;
 }
