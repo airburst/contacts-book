@@ -50,8 +50,7 @@ export default class Contacts extends Component {
   }
 
   filterContacts = (list, filter) => {
-    if (filter === '') { return list }
-    return list.filter(l => (l.fname + l.lname).toLowerCase().indexOf(filter.toLowerCase()) > -1)
+    return list.filter(l => ((l.archive === 'n') && (l.fname + l.lname).toLowerCase().indexOf(filter.toLowerCase()) > -1))
   }
 
   render () {
