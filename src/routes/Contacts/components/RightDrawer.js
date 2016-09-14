@@ -38,6 +38,16 @@ export default class RightDrawer extends Component {
     Firebase.removeContact(this.props.contact.key)
   }
 
+  getAddress = () => {
+    let address = ''
+    if (this.props.contact.line1 !== '') address += this.props.contact.line1.trim() + '\n'
+    if (this.props.contact.line2 !== '') address += this.props.contact.line2.trim() + '\n'
+    if (this.props.contact.city !== '') address += this.props.contact.city.trim() + '\n'
+    if (this.props.contact.county !== '') address += this.props.contact.county.trim() + '\n'
+    if (this.props.contact.postcode !== '') address += this.props.contact.postcode.trim() + '\n'
+    return address
+  }
+
   render () {
     const { contact, open, drawerTap } = this.props
     const style = { margin: 12 }
@@ -46,29 +56,31 @@ export default class RightDrawer extends Component {
     return (
       <Drawer width={400} openSecondary open={open}>
         <AppBar
-          title={<span style={'title'}>{contact.fname} {contact.lname}</span>}
+          title={contact.fname + ' ' + contact.lname}
           iconElementLeft={<IconButton onTouchTap={drawerTap}><NavigationClose /></IconButton>}
           style={appBarBg}
         />
-        <div>
-          <div className={'list'}>{contact.feedback}</div>
-          <div className={'list'}>
-            <a
-              className={'url'}
-              href={contact.url}
-              target='_blank'
-              rel='noopener noreferrer'
-              title='Send email to {contact.fname} {contact.lname}'
-            >{contact.url}</a>
-          </div>
-          <div className={'list'}>{contact.browser}</div>
-          <div className={'list'}>{contact.viewport}</div>
-          <div className={'list'}>{this.formatDate(contact.dateRaised) }</div>
+        <div className={'drawerItem'}>
+          <div className={'bold'}>Address</div>
+          <div>{contact.line1}</div>
+          <div>{contact.line2}</div>
+          <div>{contact.city}</div>
+          <div>{contact.county}</div>
+          <div>{contact.postcode}</div>
+        </div>
+        <div className={'drawerItem'}>
+          <a
+            className={'url'}
+            href={'mailto:' + contact.email}
+            target='_blank'
+            rel='noopener noreferrer'
+            title='Send email to {contact.fname} {contact.lname}'
+          >{contact.email}</a>
         </div>
         <Divider />
         <div className={'buttonContainer'}>
           <CopyToClipboard
-            text={contact.feedback}
+            text={this.getAddress()}
             onCopy={() => this.handleTouchTap()}
           >
             <RaisedButton label='Copy to clipboard' primary style={style} />

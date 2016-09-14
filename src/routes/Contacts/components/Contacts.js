@@ -68,7 +68,9 @@ export default class Contacts extends Component {
               />
             </div>
             <Divider />
-            {visibleContacts.map(c => { return <ContactItem key={c.key} item={c}  /> })}
+            {visibleContacts.map(c => {
+              return <ContactItem key={c.key} contact={c} showReOpenUndo={this.props.showReOpenUndo} />
+            })}
           </List>
         </Paper>
 
