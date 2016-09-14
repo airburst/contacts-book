@@ -27,7 +27,10 @@ export default class RightDrawer extends Component {
 
   constructor (props) {
     super(props)
-    this.state = { snackBarOpen: false }
+    this.state = {
+      snackBarOpen: false,
+      changedContact: this.props.contact
+    }
   }
 
   handleTouchTap = () => {
@@ -43,8 +46,18 @@ export default class RightDrawer extends Component {
     Firebase.removeContact(this.props.contact.key)
   }
 
+  handleChange = (field, event) => {
+    let update = Object.assign({}, this.state.changedContact)
+    update[field] = event.target.value
+    this.setState({ changedContact: update })
+    // let update = {}  // This version makes per-field changes in realtime but feels slow
+    // update[field] = event.target.value
+    // Firebase.updateContactByKey(this.props.contact.key, update)
+  }
+
   handleSave = () => {
-    console.log('Saving', this.props.contact.key)
+    this.props.drawerTap()
+    Firebase.updateContact(this.state.changedContact)
   }
 
   render () {
@@ -63,10 +76,12 @@ export default class RightDrawer extends Component {
           <TextField
             floatingLabelText='First name'
             defaultValue={contact.fname}
+            onChange={this.handleChange.bind(this, 'fname')}
           />
           <TextField
             floatingLabelText='Surname'
             defaultValue={contact.lname}
+            onChange={this.handleChange.bind(this, 'lname')}
           />
           <TextField
             floatingLabelText='Address'
@@ -74,18 +89,22 @@ export default class RightDrawer extends Component {
             rows={4}
             rowsMax={4}
             defaultValue={contact.address}
+            onChange={this.handleChange.bind(this, 'address')}
           />
           <TextField
             floatingLabelText='Postcode'
             defaultValue={contact.postcode}
+            onChange={this.handleChange.bind(this, 'postcode')}
           />
           <TextField
             floatingLabelText='Telephone'
             defaultValue={contact.tel}
+            onChange={this.handleChange.bind(this, 'tel')}
           />
           <TextField
             floatingLabelText='Email Address'
             defaultValue={contact.email}
+            onChange={this.handleChange.bind(this, 'email')}
           />
         </div>
         <Divider />
@@ -121,12 +140,3 @@ export default class RightDrawer extends Component {
     )
   }
 }
-
-// <div className={'drawerItem'}>
-//           <div className={'bold'}>Address</div>
-//           <div>{contact.line1}</div>
-//           <div>{contact.line2}</div>
-//           <div>{contact.city}</div>
-//           <div>{contact.county}</div>
-//           <div>{contact.postcode}</div>
-//         </div>

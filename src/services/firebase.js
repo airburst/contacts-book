@@ -25,14 +25,22 @@ const addKeys = (data) => {
 }
 
 export function removeContact (key) {
-  updateContact(key, { archive: 'y' })
+  updateContactByKey(key, { archive: 'y' })
 }
 
 export function reOpenContact (key) {
-  updateContact(key, { archive: 'n' })
+  updateContactByKey(key, { archive: 'n' })
 }
 
-export function updateContact (key, changes) {
+export function updateContactByKey (key, changes) {
   const ref = fireDB.child(key)
+  delete changes.key
   ref.update(changes)
+}
+
+export function updateContact (contact) {
+  const ref = fireDB.child(contact.key)
+  const newContact = Object.assign({}, contact)
+  delete newContact.key
+  ref.update(newContact)
 }
