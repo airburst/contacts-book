@@ -1,5 +1,5 @@
 import {
-  blue500, blue300,
+  grey900, grey800,
   red500,
   grey100, grey300, grey400, grey500,
   white, darkBlack, fullBlack
@@ -11,8 +11,8 @@ export default {
   spacing: spacing,
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: blue500,
-    primary2Color: blue300,
+    primary1Color: grey900,
+    primary2Color: grey800,
     primary3Color: grey400,
     accent1Color: red500,
     accent2Color: grey100,
@@ -22,7 +22,7 @@ export default {
     canvasColor: white,
     borderColor: grey300,
     disabledColor: fade(darkBlack, 0.3),
-    pickerHeaderColor: blue500,
+    pickerHeaderColor: grey900,
     clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack
   }
