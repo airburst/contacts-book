@@ -28,6 +28,10 @@ export function removeContact (key) {
   updateItem(key, { archive: 'y' })
 }
 
+export function reOpenContact (key) {
+  updateItem(key, { archive: 'n' })
+}
+
 export function updateItem (key, changes) {
   const ref = fireDB.child(key)
   ref.update(changes)

@@ -45,7 +45,7 @@ export default class Contacts extends Component {
   };
 
   reOpenContact = () => {
-    Firebase.openContact(this.props.settings.lastKey)
+    Firebase.reOpenContact(this.props.settings.lastKey)
     this.props.hideReOpenUndo()
   }
 
