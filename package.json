@@ -1,6 +1,6 @@
 {
   "name": "contacts-book",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Contact Book",
   "main": "index.js",
   "engines": {
@@ -19,6 +19,8 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
+    "build": "better-npm-run build",
+    "build:prod": "better-npm-run build:prod",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
@@ -32,6 +34,19 @@
       "command": "nodemon --exec node bin/server --ignore dist --ignore coverage --ignore tests --ignore src",
       "env": {
         "NODE_ENV": "development",
+        "DEBUG": "app:*"
+      }
+    },
+    "build": {
+      "command": "npm run clean && npm run compile",
+      "env": {
+        "DEBUG": "app:*"
+      }
+    },
+    "build:prod": {
+      "command": "npm run build",
+      "env": {
+        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
